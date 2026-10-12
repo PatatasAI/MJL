@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UltraPixel | CCTV, Computers & Tech Solutions in Las Piñas</title>
+<meta name="description" content="UltraPixel — your trusted supplier of CCTV, computers, computer parts, printers and cellphones in Las Piñas. Installment available via Home Credit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070b14;
+    --bg-2: #0d1424;
+    --card: #111a2e;
+    --line: #1e2a44;
+    --text: #e8eefc;
+    --muted: #93a1c0;
+    --accent: #22d3ee;
+    --accent-2: #3b82f6;
+    --glow: rgba(34, 211, 238, .35);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .logo { font-family: "Space Grotesk", "Inter", sans-serif; line-height: 1.15; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+  .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Nav */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(7, 11, 20, .8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 1.35rem; font-weight: 700; }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 6px;
+    box-shadow: 0 0 18px var(--glow);
+  }
+  .logo-mark span { background: rgba(255,255,255,.9); border-radius: 2px; }
+  .logo-mark span:nth-child(2n) { background: rgba(255,255,255,.35); }
+  .nav-links { display: flex; gap: 28px; align-items: center; font-size: .95rem; color: var(--muted); }
+  .nav-links a:hover { color: var(--text); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--text); cursor: pointer; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: .95rem;
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #04101c; box-shadow: 0 8px 28px var(--glow); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 34px var(--glow); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .nav-links .btn { color: #04101c; padding: 9px 18px; }
+
+  /* Hero */
+  .hero { position: relative; padding: 96px 0 80px; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(600px 300px at 80% 20%, rgba(59,130,246,.25), transparent 70%),
+      radial-gradient(500px 300px at 10% 80%, rgba(34,211,238,.18), transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px; opacity: .35;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); background: var(--bg-2);
+    padding: 6px 14px; border-radius: 999px; font-size: .85rem; color: var(--muted); margin-bottom: 22px;
+  }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+  .hero h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); margin-bottom: 20px; }
+  .hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 540px; margin-bottom: 32px; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .hero-visual {
+    position: relative; aspect-ratio: 1; max-width: 440px; justify-self: center; width: 100%;
+  }
+  .monitor {
+    position: absolute; inset: 8% 4% 22% 4%;
+    background: linear-gradient(160deg, #15213b, #0b1222);
+    border: 1px solid var(--line); border-radius: 18px; padding: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(34,211,238,.1) inset;
+  }
+  .screen {
+    height: 100%; border-radius: 10px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px;
+  }
+  .cam {
+    position: relative; border-radius: 6px;
+    background: linear-gradient(135deg, #1b2a48, #0f1a30);
+    font-size: .65rem; color: var(--muted); padding: 6px;
+  }
+  .cam::after {
+    content: ""; position: absolute; top: 7px; right: 7px; width: 6px; height: 6px; border-radius: 50%;
+    background: #ef4444; box-shadow: 0 0 8px #ef4444; animation: blink 1.4s infinite;
+  }
+  .cam:nth-child(1) { background: linear-gradient(135deg, #1d3557, #10233b); }
+  .cam:nth-child(4) { background: linear-gradient(135deg, #123a46, #0c1d2a); }
+  @keyframes blink { 50% { opacity: .2; } }
+  .stand { position: absolute; left: 42%; right: 42%; bottom: 12%; height: 10%; background: #15213b; border: 1px solid var(--line); border-top: 0; }
+  .base { position: absolute; left: 30%; right: 30%; bottom: 9%; height: 3%; background: #1a2846; border-radius: 6px; }
+  .float-card {
+    position: absolute; background: rgba(17, 26, 46, .92); border: 1px solid var(--line);
+    border-radius: 12px; padding: 10px 14px; font-size: .8rem; display: flex; gap: 10px; align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4); animation: float 5s ease-in-out infinite;
+  }
+  .float-card b { display: block; font-size: .95rem; }
+  .float-card small { color: var(--muted); }
+  .fc-1 { top: 0; left: -4%; }
+  .fc-2 { bottom: 0; right: -2%; animation-delay: -2.5s; }
+  .fc-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: rgba(34,211,238,.12); color: var(--accent); }
+  @keyframes float { 50% { transform: translateY(-8px); } }
+
+  /* Stats */
+  .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 32px 16px; text-align: center; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: 0; }
+  .stat b { display: block; font-family: "Space Grotesk", sans-serif; font-size: 2.2rem; }
+  .stat span { color: var(--muted); font-size: .9rem; }
+
+  /* Sections */
+  section { padding: 96px 0; }
+  .sec-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+  .sec-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 14px; }
+  .sec-head p { color: var(--muted); }
+
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px 24px; transition: transform .25s, border-color .25s, box-shadow .25s;
+  }
+  .card:hover { transform: translateY(-6px); border-color: rgba(34,211,238,.5); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+  .card .ic {
+    width: 52px; height: 52px; border-radius: 14px; margin-bottom: 20px;
+    display: grid; place-items: center; color: var(--accent);
+    background: linear-gradient(135deg, rgba(34,211,238,.15), rgba(59,130,246,.15));
+    border: 1px solid rgba(34,211,238,.25);
+  }
+  .card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .card p { color: var(--muted); font-size: .95rem; margin-bottom: 16px; }
+  .card ul { list-style: none; font-size: .88rem; color: var(--muted); }
+  .card li { padding: 4px 0; display: flex; gap: 8px; }
+  .card li::before { content: "›"; color: var(--accent); font-weight: 700; }
+
+  /* Installment */
+  .install { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .install-box {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+  .install h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 16px; }
+  .install p { color: var(--muted); margin-bottom: 24px; }
+  .steps { display: grid; gap: 14px; }
+  .step {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px;
+  }
+  .step .n {
+    flex: none; width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 700; color: #04101c;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  .step b { display: block; margin-bottom: 2px; }
+  .step span { color: var(--muted); font-size: .92rem; }
+
+  /* Why */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .why { padding: 26px; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(180deg, var(--card), var(--bg)); }
+  .why .ic { color: var(--accent); margin-bottom: 14px; }
+  .why h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .why p { color: var(--muted); font-size: .93rem; }
+
+  /* CTA / Contact */
+  .cta {
+    position: relative; overflow: hidden; text-align: center;
+    border-radius: 24px; padding: 64px 28px;
+    background: linear-gradient(135deg, #0e2a44, #0b1738 60%, #141a4a);
+    border: 1px solid rgba(34,211,238,.3);
+  }
+  .cta::before {
+    content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(var(--glow), transparent 70%); top: -200px; right: -120px;
+  }
+  .cta h2 { position: relative; font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 14px; }
+  .cta p { position: relative; color: var(--muted); max-width: 560px; margin: 0 auto 30px; }
+  .cta .hero-ctas { position: relative; justify-content: center; }
+  .contact-row { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; margin-top: 36px; color: var(--muted); font-size: .95rem; }
+  .contact-row div { display: flex; align-items: center; gap: 8px; }
+  .contact-row svg { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: .9rem; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+  .socials { display: flex; gap: 12px; }
+  .socials a {
+    width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    border: 1px solid var(--line); transition: border-color .2s, color .2s;
+  }
+  .socials a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .hero-grid, .install-box { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 380px; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  }
+  @media (max-width: 720px) {
+    .menu-btn { display: block; }
+    .nav-links {
+      position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; gap: 0;
+      background: var(--bg-2); border-bottom: 1px solid var(--line);
+      max-height: 0; overflow: hidden; transition: max-height .3s;
+    }
+    .nav-links.open { max-height: 360px; }
+    .nav-links a { padding: 14px 20px; width: 100%; }
+    .nav-links .btn { margin: 10px 20px 18px; width: auto; justify-content: center; }
+    .hero { padding: 64px 0 56px; }
+    section { padding: 72px 0; }
+    .cards, .why-grid { grid-template-columns: 1fr; }
+    .foot { flex-direction: column; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo" aria-label="UltraPixel home">
+      <span class="logo-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+      Ultra<span class="grad">Pixel</span>
+    </a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" id="menuBtn">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#products">Products</a>
+      <a href="#installment">Installment</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+      <a href="https://m.me/Ultrapixtech" target="_blank" rel="noopener" class="btn btn-primary">Message Us</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="pill"><span class="dot"></span> Las Piñas City, Philippines</div>
+        <h1>Tech solutions for every <span class="grad">home &amp; business</span></h1>
+        <p class="lead">Your trusted supplier of CCTV systems, computers, computer parts, printers and cellphones — with professional installation and easy installment through Home Credit.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn btn-primary">Browse Products
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="https://www.facebook.com/Ultrapixtech" target="_blank" rel="noopener" class="btn btn-ghost">Visit our Facebook</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="monitor">
+          <div class="screen">
+            <div class="cam">CAM 01 · Gate</div>
+            <div class="cam">CAM 02 · Store</div>
+            <div class="cam">CAM 03 · Hall</div>
+            <div class="cam">CAM 04 · Parking</div>
+          </div>
+        </div>
+        <div class="stand"></div>
+        <div class="base"></div>
+        <div class="float-card fc-1">
+          <div class="fc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><b>24/7 Protected</b><small>CCTV monitoring</small></div>
+        </div>
+        <div class="float-card fc-2">
+          <div class="fc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+          <div><b>Home Credit</b><small>Installment available</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><b class="grad" data-count="500">500+</b><span>Successful projects</span></div>
+      <div class="stat"><b class="grad" data-count="25">25+</b><span>Years of experience</span></div>
+      <div class="stat"><b class="grad" data-count="60">60K+</b><span>Facebook followers</span></div>
+      <div class="stat"><b class="grad">4</b><span>Product categories</span></div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <section id="products">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">What we offer</div>
+        <h2>Everything tech, under one roof</h2>
+        <p>From securing your property to powering your work and play, UltraPixel has the gear — and the know-how — you need.</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l13-4 2 6-13 4z"/><path d="M16 9l4 2-1 3-4-2"/><path d="M7 12l1 4H3v4"/></svg></div>
+          <h3>CCTV &amp; Security</h3>
+          <p>Complete surveillance packages for homes, stores and offices — supplied and installed.</p>
+          <ul><li>HD &amp; IP camera packages</li><li>DVR / NVR systems</li><li>Remote viewing on your phone</li><li>Professional installation</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></svg></div>
+          <h3>Computers &amp; Parts</h3>
+          <p>Desktops, laptops and parts for gaming, school, office and business use.</p>
+          <ul><li>Custom PC builds</li><li>Laptops &amp; desktop sets</li><li>CPUs, GPUs, RAM, SSDs</li><li>Upgrades &amp; repairs</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><rect x="2" y="9" width="20" height="9" rx="2"/><path d="M6 14h12v8H6z"/></svg></div>
+          <h3>Printers</h3>
+          <p>Reliable printers for home, school and office — plus inks and setup support.</p>
+          <ul><li>Ink tank &amp; laser printers</li><li>All-in-one print/scan/copy</li><li>Inks &amp; consumables</li><li>Setup assistance</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div>
+          <h3>Cellphones</h3>
+          <p>The latest smartphones from popular brands, available cash or on installment.</p>
+          <ul><li>Latest smartphone models</li><li>Accessories</li><li>Home Credit installment</li><li>Brand-new units</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installment -->
+  <section id="installment" class="install">
+    <div class="wrap install-box">
+      <div class="reveal">
+        <div class="eyebrow">Buy now, pay later</div>
+        <h2>Get your gadget today with <span class="grad">Home Credit</span></h2>
+        <p>No need to wait. Get your new phone, laptop, PC or CCTV system through easy installment plans with Home Credit — quick approval and affordable monthly payments.</p>
+        <a href="https://m.me/Ultrapixtech" target="_blank" rel="noopener" class="btn btn-primary">Ask about installment</a>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><div class="n">1</div><div><b>Choose your item</b><span>Browse our products or message us what you need.</span></div></div>
+        <div class="step"><div class="n">2</div><div><b>Visit our store</b><span>Bring a valid ID and apply for Home Credit on the spot.</span></div></div>
+        <div class="step"><div class="n">3</div><div><b>Get approved</b><span>Fast approval process with flexible monthly terms.</span></div></div>
+        <div class="step"><div class="n">4</div><div><b>Take it home</b><span>Walk out with your new tech the same day.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Why UltraPixel</div>
+        <h2>Trusted by homes &amp; businesses</h2>
+        <p>Decades of experience and hundreds of completed projects — we treat every customer like a long-term partner.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why reveal">
+          <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <h3>Proven experience</h3>
+          <p>25+ years in the tech industry and 500+ successful installations and projects.</p>
+        </div>
+        <div class="why reveal">
+          <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Genuine products</h3>
+          <p>Brand-new, quality-checked units from trusted brands — no surprises.</p>
+        </div>
+        <div class="why reveal">
+          <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div>
+          <h3>Expert installation</h3>
+          <p>Our technicians handle CCTV setup, PC builds and configuration for you.</p>
+        </div>
+        <div class="why reveal">
+          <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div>
+          <h3>Flexible payment</h3>
+          <p>Pay in cash or spread it out with Home Credit installment plans.</p>
+        </div>
+        <div class="why reveal">
+          <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+          <h3>After-sales support</h3>
+          <p>We're here after the purchase for troubleshooting, upgrades and service.</p>
+        </div>
+        <div class="why reveal">
+          <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+          <h3>Community trusted</h3>
+          <p>Join 60,000+ followers who rely on UltraPixel for their tech needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta reveal">
+        <h2>Ready to upgrade your setup?</h2>
+        <p>Send us a message for quotations, product availability, CCTV packages or installment inquiries. We'll get back to you fast.</p>
+        <div class="hero-ctas">
+          <a href="https://m.me/Ultrapixtech" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.1 7.1V22l2.9-1.6c1.2.3 2.5.5 3.9.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9l-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.4 5.8z"/></svg>
+            Chat on Messenger
+          </a>
+          <a href="https://www.facebook.com/Ultrapixtech" target="_blank" rel="noopener" class="btn btn-ghost">Follow on Facebook</a>
+        </div>
+        <div class="contact-row">
+          <div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Las Piñas City, Metro Manila
+          </div>
+          <div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+            <a href="https://ultrapixtech.com/" target="_blank" rel="noopener">ultrapixtech.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="logo" style="font-size:1.1rem">
+      <span class="logo-mark" aria-hidden="true" style="width:28px;height:28px;padding:5px"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+      Ultra<span class="grad">Pixel</span>
+    </a>
+    <p>&copy; <span id="year"></span> UltraPixel. CCTV · Computers · Printers · Cellphones</p>
+    <div class="socials">
+      <a href="https://www.facebook.com/Ultrapixtech" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8V6c0-.9.6-1 1-1h3V1h-4c-3.3 0-4 2.4-4 4v3H7v4h3v11h4V12h3.5l.5-4z"/></svg>
+      </a>
+      <a href="https://m.me/Ultrapixtech" target="_blank" rel="noopener" aria-label="Messenger">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.1 7.1V22l2.9-1.6c1.2.3 2.5.5 3.9.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9l-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.4 5.8z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', false);
+  }));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Count-up stats
+  const suffix = { 500: '+', 25: '+', 60: 'K+' };
+  const countIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, end = +el.dataset.count, start = performance.now();
+      const tick = now => {
+        const p = Math.min((now - start) / 1400, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suffix[end];
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      countIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+</script>
+</body>
+</html>
